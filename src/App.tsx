@@ -109,4 +109,18 @@ const App = (): JSX.Element => {
   );
 };
 
+useEffect(() => {
+  fetch("https://web-production-b8414.up.railway.app/api/test/")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("✅ Connected to backend:", data);
+      alert("Connected to backend: " + data.status);
+    })
+    .catch((err) => {
+      console.error("❌ Failed to connect:", err);
+      alert("Failed to connect to backend");
+    });
+}, []);
+
+
 export default App;

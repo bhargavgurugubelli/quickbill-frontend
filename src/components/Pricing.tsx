@@ -173,19 +173,23 @@ const Pricing = ({ showPayButton = true }: PricingProps): JSX.Element => {
                     >
                       per month
                     </Typography>
+
+
                     <Box>
-                      {item.features.map((feature, idx) => (
-                        <Typography
-                          key={idx}
-                          align="center"
-                          variant="body2"
-                          color="text.primary"
-                          sx={{ mb: 0.7 }}
-                        >
-                          • {feature.name}
-                        </Typography>
-                      ))}
-                    </Box>
+  {Array.isArray(item.features) &&
+    item.features.map((feature, idx) => (
+      <Typography
+        key={idx}
+        align="center"
+        variant="body2"
+        color="text.primary"
+        sx={{ mb: 0.7 }}
+      >
+        • {feature.name}
+      </Typography>
+    ))}
+</Box>
+
                   </CardContent>
 
                   <Box flexGrow={1} />

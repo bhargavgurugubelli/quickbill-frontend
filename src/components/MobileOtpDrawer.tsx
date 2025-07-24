@@ -21,7 +21,7 @@ const MobileOtpDrawer: React.FC<Props> = ({ open, onClose }) => {
   const handleSendOtp = async () => {
     if (!mobile) return;
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/send-otp/', { mobile });
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/send-otp/`, { mobile });
       setOtpSent(true);
       setResendTimer(60);
       console.log('📨 OTP sent to mobile:', mobile);
@@ -34,7 +34,7 @@ const MobileOtpDrawer: React.FC<Props> = ({ open, onClose }) => {
   const handleResendOtp = async () => {
     if (!mobile) return;
     try {
-      await axios.post('http://127.0.0.1:8000/api/auth/send-otp/', { mobile });
+      await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/send-otp/`, { mobile });
       setResendTimer(60);
       console.log('🔁 OTP resent to mobile:', mobile);
     } catch (err) {
@@ -47,7 +47,7 @@ const MobileOtpDrawer: React.FC<Props> = ({ open, onClose }) => {
     if (!otp || !mobile) return;
     try {
       console.log('🧪 Verifying OTP:', otp, 'for mobile:', mobile);
-      const res = await axios.post('http://127.0.0.1:8000/api/auth/verify-otp/', {
+      const res = await axios.post(`${process.env.REACT_APP_BASE_URL}/api/auth/verify-otp/`, {
         mobile,
         otp,
       });
@@ -162,16 +162,7 @@ const MobileOtpDrawer: React.FC<Props> = ({ open, onClose }) => {
         </Box>
 
         <Divider sx={{ my: 3 }}>Or</Divider>
-
-        <Button fullWidth variant="outlined" startIcon={<span>📷</span>}>
-          Login by scanning QR Code
-        </Button>
-
-        <Box textAlign="center" mt={4}>
-          <Typography variant="caption" color="textSecondary">
-            🔒 100% secure &nbsp;|&nbsp; ISO 27001 Certified
-          </Typography>
-        </Box>
+        
       </Box>
     </Drawer>
   );
